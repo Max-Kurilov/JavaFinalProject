@@ -8,19 +8,29 @@ public class Character {
 
 
     public Character(){
-        this("someone", 10, 5, 10);
+        this("someone", 10, 5);
     }
 
-    public Character(String name, int hp, int damage, int speed){
+    public Character(String name, int maxHp, int damage){
         this.name = name;
-        this.hp = hp;
+        this.maxHp = maxHp;
         this.damage = damage;
-
+        hp = maxHp;
     }
 
-    public void attack(){}
-    public void heal(){}
-    public void defence(){}
+
+    public void attack(){
+        System.out.println("Attack!!!");
+    }
+
+    public void heal(){
+        System.out.println("Heal!");
+    }
+
+    public void defence(){
+        System.out.println("defence");
+    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -29,11 +39,14 @@ public class Character {
         return name;
     }
 
+    public void setMaxHp(int maxHp) {this.maxHp = maxHp;}
+    public void addHp(int hp){
+        this.maxHp += hp;
+    }
+    public int getMaxHp() {return maxHp;}
+
     public void setHp(int hp) {
         this.hp = hp;
-    }
-    public void addHp(int hp){
-        this.hp += hp;
     }
     public int getHp() {
         return hp;
