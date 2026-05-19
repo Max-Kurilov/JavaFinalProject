@@ -5,10 +5,10 @@ public class Character {
     private int damage;
 //    private int speed;
 //    private int position;
-
+    private boolean isAlive = true;
 
     public Character(){
-        this("someone", 10, 5);
+        this("someone", 10, 2);
     }
 
     public Character(String name, int maxHp, int damage){
@@ -19,16 +19,35 @@ public class Character {
     }
 
 
-    public void attack(){
+    public void attack(Character other){
         System.out.println("Attack!!!");
+
+        other.takeDamage(getDamage());
     }
 
-    public void heal(){
+    public void heal(int amount){
         System.out.println("Heal!");
+
+        hp += amount;
+        if(hp > maxHp){
+            hp = maxHp;
+        }
     }
 
     public void defence(){
         System.out.println("defence");
+    }
+
+    public void takeDamage(int dmg){
+        hp -= Math.abs(dmg);
+
+        if(hp<0){
+            hp = 0;
+        }
+    }
+
+    public void addDamage(int damage){
+        this.damage += damage;
     }
 
 
@@ -40,9 +59,6 @@ public class Character {
     }
 
     public void setMaxHp(int maxHp) {this.maxHp = maxHp;}
-    public void addHp(int hp){
-        this.maxHp += hp;
-    }
     public int getMaxHp() {return maxHp;}
 
     public void setHp(int hp) {
@@ -52,15 +68,11 @@ public class Character {
         return hp;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-    public void addDamage(int damage){
-        this.damage += damage;
-    }
-    public int getDamage() {
-        return damage;
-    }
+    public void setDamage(int damage) { this.damage = damage; }
+    public int getDamage() { return damage; }
+
+    public boolean isAlive() { return isAlive; }
+    public void setAlive(boolean alive) { isAlive = alive; }
 
 
 //    public void setSpeed(int speed) {

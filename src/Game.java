@@ -3,7 +3,9 @@ import java.util.Scanner;
 
 public class Game {
     Scanner scanner = new Scanner(System.in);
-    Player player = new Player();
+    Player player = new Player("someone");
+
+    Enemy enemy;
 
     public void newGame() {
         System.out.println("New Game!");
@@ -12,22 +14,31 @@ public class Game {
             System.out.println("Round " + i + "!");
 
             if (i != 10){
-                Enemy enemy = new Enemy();
+                enemy = new Enemy();
             }else{
-                BossEnemy boss = new BossEnemy();
+                enemy = new BossEnemy();
                 System.out.println("Boss!");
             }
 
             while (true){
                 String command = scanner.nextLine();
 
+                if(!player.isAlive()){
+                    System.out.println(player.getName() + " dead!");
+                    System.out.println("Game Over!");
+                    return;
+                }else if(!enemy.isAlive()){
+                    System.out.println("Enemy " + i + " is dead!");
+                    break;
+                }
+
                 if (command.equals("attack")){
 
-                    System.out.println("Attack!");
+                    player.attack(enemy);
 
                 }else if (command.equals("heal")){
 
-                    System.out.println("Heal!");
+                    player.useHeal();
 
                 }else if (command.equals("defence")){
 

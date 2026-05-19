@@ -1,2 +1,2 @@
-public class BossEnemy {
+public class BossEnemy extends Enemy{
 }
