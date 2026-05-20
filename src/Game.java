@@ -1,4 +1,3 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Game {
@@ -11,7 +10,7 @@ public class Game {
         System.out.println("New Game!");
 
         for (int i = 1; i <= 10; i++) {
-            System.out.println("Round " + i + "!");
+            System.out.println("Wave " + i + "!");
 
             if (i != 10){
                 enemy = new Enemy();
@@ -20,9 +19,16 @@ public class Game {
                 System.out.println("Boss!");
             }
 
-            while (true){
-                String command = scanner.nextLine();
+            System.out.println("=== Player Stats ===");
+            System.out.println("HP: " + player.getHp() + "/" + player.getMaxHp());
+            System.out.println("Damage: " + player.getDamage());
 
+            System.out.println("=== Enemy Stats ===");
+            System.out.println("HP: " + enemy.getHp() + "/" + enemy.getMaxHp());
+            System.out.println("Damage: " + enemy.getDamage());
+
+            int round = 0;
+            while (true){
                 if(!player.getIsAlive()){
                     System.out.println(player.getName() + " dead!");
                     System.out.println("Game Over!");
@@ -32,46 +38,50 @@ public class Game {
                     break;
                 }
 
-                if (command.equals("attack")){
-
-                    player.attack(enemy);
-
-                }else if (command.equals("heal")){
-
-                    player.useHeal();
-
-                }else if (command.equals("defence")){
-
-                    System.out.println("Defence!");
-
-                }else if (command.equals("skip")){
-
-                    break;
-
-                }else if(command.equals("stop")){
-
-                    System.out.println("Game Finished.");
-                    return;
-
-                }else{
-                    System.out.println("unknow command.");
+                round++;
+                if(round % 2 == 1){
+                    player.endDefence();
+                }else if(round % 2 == 0){
+                    enemy.endDefence();
                 }
+
+                while (true){
+
+
+                    String command = scanner.nextLine();
+
+                    if (command.equals("attack")){
+
+                        player.attack(enemy);
+                        break;
+
+                    }else if (command.equals("heal")){
+
+                        player.useHeal();
+
+                    }else if (command.equals("defence")){
+
+                        player.useDefence();
+
+                    }else if (command.equals("skip")){
+
+                        break;
+
+                    }else if(command.equals("stop")){
+
+                        System.out.println("Game Finished.");
+                        return;
+
+                    }else{
+                        System.out.println("unknow command.");
+                    }
+                }
+
+
+                System.out.println("Player HP: " + player.getHp() + "/" + player.getMaxHp());
+                System.out.println("Enemy HP: " + enemy.getHp() + "/" + enemy.getMaxHp());
             }
         }
 
     }
-
-//    public void commands(String command){
-//        if(command.equals("attack")){
-//
-//        }else if(command.equals("defence")){
-//
-//        }else if(command.equals("heal")){
-//
-//        }else if(command.equals("stop")){
-//
-//        }else{
-//
-//        }
-//    }
 }

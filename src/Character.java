@@ -3,8 +3,8 @@ public class Character {
     private int maxHp;
     private int hp;
     private int damage;
-//    private int speed;
-//    private int position;
+
+    private boolean defended = false;
     private boolean isAlive = true;
 
     public Character(){
@@ -22,7 +22,9 @@ public class Character {
     public void attack(Character other){
         System.out.println("Attack!!!");
 
-        other.takeDamage(getDamage());
+        if(!other.getDefended()) {
+            other.takeDamage(getDamage());
+        }
     }
 
     public void heal(int amount){
@@ -36,6 +38,14 @@ public class Character {
 
     public void defence(){
         System.out.println("defence");
+
+        setDefended(true);
+    }
+
+    public void endDefence(){
+        if (getDefended()){
+            setDefended(false);
+        }
     }
 
     public void takeDamage(int dmg){
@@ -45,10 +55,6 @@ public class Character {
             hp = 0;
             setAlive(false);
         }
-    }
-
-    public void addDamage(int damage){
-        this.damage += damage;
     }
 
 
@@ -72,8 +78,11 @@ public class Character {
     public void setDamage(int damage) { this.damage = damage; }
     public int getDamage() { return damage; }
 
-    public boolean getIsAlive() { return isAlive; }
+    public void setDefended(boolean defended) {this.defended = defended; }
+    public boolean getDefended() { return defended; }
+
     public void setAlive(boolean alive) { isAlive = alive; }
+    public boolean getIsAlive() { return isAlive; }
 
 
 //    public void setSpeed(int speed) {
