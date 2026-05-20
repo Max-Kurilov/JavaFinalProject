@@ -41,8 +41,9 @@ public class Character {
     public void takeDamage(int dmg){
         hp -= Math.abs(dmg);
 
-        if(hp<0){
+        if(hp<=0){
             hp = 0;
+            setAlive(false);
         }
     }
 
@@ -71,7 +72,7 @@ public class Character {
     public void setDamage(int damage) { this.damage = damage; }
     public int getDamage() { return damage; }
 
-    public boolean isAlive() { return isAlive; }
+    public boolean getIsAlive() { return isAlive; }
     public void setAlive(boolean alive) { isAlive = alive; }
 
 

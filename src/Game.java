@@ -23,11 +23,11 @@ public class Game {
             while (true){
                 String command = scanner.nextLine();
 
-                if(!player.isAlive()){
+                if(!player.getIsAlive()){
                     System.out.println(player.getName() + " dead!");
                     System.out.println("Game Over!");
                     return;
-                }else if(!enemy.isAlive()){
+                }else if(!enemy.getIsAlive()){
                     System.out.println("Enemy " + i + " is dead!");
                     break;
                 }
