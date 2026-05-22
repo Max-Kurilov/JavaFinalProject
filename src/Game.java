@@ -29,11 +29,11 @@ public class Game {
 
             int round = 0;
             while (true){
-                if(!player.getIsAlive()){
+                if(!player.isAlive()){
                     System.out.println(player.getName() + " dead!");
                     System.out.println("Game Over!");
                     return;
-                }else if(!enemy.getIsAlive()){
+                }else if(!enemy.isAlive()){
                     System.out.println("Enemy " + i + " is dead!");
                     break;
                 }
@@ -45,9 +45,8 @@ public class Game {
                     enemy.endDefence();
                 }
 
+                player.resetStates();
                 while (true){
-
-
                     String command = scanner.nextLine();
 
                     if (command.equals("attack")){
@@ -57,11 +56,19 @@ public class Game {
 
                     }else if (command.equals("heal")){
 
-                        player.useHeal();
+                        if(player.useHeal()){
+                            System.out.println("Heal used!");
+                        }else{
+                            System.out.println("Cannot heal!");
+                        }
 
                     }else if (command.equals("defence")){
 
-                        player.useDefence();
+                        if(player.useDefence()){
+                            System.out.println("Defence!");
+                        }else{
+                            System.out.println("Cannot defence!");
+                        }
 
                     }else if (command.equals("skip")){
 

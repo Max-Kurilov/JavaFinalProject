@@ -1,31 +1,33 @@
 public class Player extends Character{
-    private int level;
-    private int numAbilities;
-    private int healsLeft;
-    private int defensesLeft;
-
-    private int healPower = 2;
 
     public Player(String name){
         setName(name);
 
-        level = 0;
-        numAbilities = 0;
-        healsLeft = 1;
-        defensesLeft = 1;
     }
 
-    public void useHeal(){
-        if(healsLeft > 0 && getHp() < getMaxHp()){
-            heal(healPower);
-            healsLeft--;
+    public boolean useHeal(){
+        if(getHealsLeft() <= 0 || getHp() >= getMaxHp() || isUsedHeal()){
+            return false;
         }
+
+        heal();
+
+        setHealsLeft(getHealsLeft()-1);
+        setUsedHeal(true);
+
+        return true;
     }
 
-    public void useDefence(){
-        if(defensesLeft > 0 && !getDefended()){
-            defence();
-            defensesLeft--;
+    public boolean useDefence(){
+        if(getDefensesLeft() <= 0 || isDefended() || isUsedDefence()){
+            return false;
         }
+
+        defence();
+
+        setDefensesLeft(getDefensesLeft()-1);
+        setUsedDefence(true);
+
+        return true;
     }
 }
