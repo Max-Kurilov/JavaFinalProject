@@ -148,6 +148,8 @@ public class Game {
                 System.out.println("Enemy HP: " + enemy.getHp() + "/" + enemy.getMaxHp());
             }
         }
+
+        System.out.println("Thank you for playing!");
     }
 
     // Recursive countdown method
